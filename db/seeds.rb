@@ -3,12 +3,20 @@
 User.destroy_all
 User.reset_pk_sequence
 
+House.destroy_all
+House.reset_pk_sequence
+
+Quizquestion.destroy_all
+Quizquestion.reset_pk_sequence
+
 User.create(name: "Zech", username: "zech_loves_harry_potter", password: "123abc")
 User.create(name: "Aiden", username: "aiden_wizard", password: "abc123")
 User.create(name: "Alexandra", username: "alexandra_is_a_witch", password: "password")
 
-Quizquestion.destroy_all
-Quizquestion.reset_pk_sequence
+House.create(name: "Gryffindor", colors: "Red & Gold", qualities: "Bravery & Loyalty")
+House.create(name: "Hufflepuff", colors: "Yellow & Black", qualities: "Dedication & Patience")
+House.create(name: "Ravenclaw", colors: "Blue & Bronze", qualities: "Intelligence & Creativity")
+House.create(name: "Slytherin", colors: "Green & Silver", qualities: "Resourcefulness & Ambition")
 
 
 # Question 1
