@@ -1,3 +1,3 @@
-class QuizQuestion < ActiveRecord::Base
+class Quizquestion < ActiveRecord::Base
 
 end
