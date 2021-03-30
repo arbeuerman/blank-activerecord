@@ -12,9 +12,6 @@ Quizquestion.reset_pk_sequence
 Useranswer.destroy_all
 Useranswer.reset_pk_sequence
 
-
-
-
 Useranswer.create(quizquestion_id:1,user_id:1)
 Useranswer.create(quizquestion_id:2,user_id:2)
 Useranswer.create(quizquestion_id:3,user_id:3)
