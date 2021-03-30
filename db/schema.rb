@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_182407) do
   end
 
   create_table "useranswers", force: :cascade do |t|
-    t.integer "question_id"
+    t.integer "quizquestion_id"
     t.integer "user_id"
   end
 

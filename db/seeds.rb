@@ -15,9 +15,9 @@ Useranswer.reset_pk_sequence
 
 
 
-Useranswer.create(question_id:1,user_id:1)
-Useranswer.create(question_id:2,user_id:2)
-Useranswer.create(question_id:3,user_id:3)
+Useranswer.create(quizquestion_id:1,user_id:1)
+Useranswer.create(quizquestion_id:2,user_id:2)
+Useranswer.create(quizquestion_id:3,user_id:3)
 
 User.create(name: "Zech", username: "zech_loves_harry_potter", password: "123abc", house_id: 1)
 User.create(name: "Aiden", username: "aiden_wizard", password: "abc123", house_id: 2)
