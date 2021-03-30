@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_224442) do
+ActiveRecord::Schema.define(version: 2021_03_30_182407) do
 
   create_table "houses", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 2021_03_29_224442) do
     t.string "question"
     t.string "response_option"
     t.integer "house_id"
+  end
+
+  create_table "useranswers", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

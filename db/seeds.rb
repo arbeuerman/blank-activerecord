@@ -9,9 +9,19 @@ House.reset_pk_sequence
 Quizquestion.destroy_all
 Quizquestion.reset_pk_sequence
 
-User.create(name: "Zech", username: "zech_loves_harry_potter", password: "123abc")
-User.create(name: "Aiden", username: "aiden_wizard", password: "abc123")
-User.create(name: "Alexandra", username: "alexandra_is_a_witch", password: "password")
+Useranswer.destroy_all
+Useranswer.reset_pk_sequence
+
+
+
+
+Useranswer.create(question_id:1,user_id:1)
+Useranswer.create(question_id:2,user_id:2)
+Useranswer.create(question_id:3,user_id:3)
+
+User.create(name: "Zech", username: "zech_loves_harry_potter", password: "123abc", house_id: 1)
+User.create(name: "Aiden", username: "aiden_wizard", password: "abc123", house_id: 2)
+User.create(name: "Alexandra", username: "alexandra_is_a_witch", password: "password", house_id: 3)
 
 House.create(name: "Gryffindor", colors: "Red & Gold", qualities: "Bravery & Loyalty")
 House.create(name: "Hufflepuff", colors: "Yellow & Black", qualities: "Dedication & Patience")
