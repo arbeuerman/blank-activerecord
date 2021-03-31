@@ -1,11 +1,12 @@
 class Interface 
 
     #setter and getter methods 
-    attr_accessor :user
+    attr_accessor :user, :user_answers
     attr_reader :prompt
 
     def initialize
         @prompt = TTY::Prompt.new
+        @user_answers = []
     end 
 
     def run
@@ -19,13 +20,15 @@ class Interface
         puts "hello"
     end
 
-    def sign_up_or_register
+    def sign_up_or_login
         prompt.select "Would you like to login or register?" do |menu|
             menu.choice "Login", -> { login_helper }
             menu.choice "Register", -> { register_helper }
-            menu.choice "I do not wish to enter the wizarding world", -> {"Goodbye"}
+            # menu.choice "I do not wish to enter the wizarding world", -> {"Goodbye" }
         end 
+  
     end 
+    
 
     def display_main_menu
         #@user.reload
@@ -38,13 +41,16 @@ class Interface
         end
     end
 
-    def display_question
-        prompt.select Quizquestion.give_quiz.keys[0] do |menu|
-            menu.choice Quizquestion.give_quiz.values[0][0], -> { puts "picked answer 1" }
-            menu.choice Quizquestion.give_quiz.values[0][1], -> { puts "picked answer 1" }
-            menu.choice Quizquestion.give_quiz.values[0][2], -> { puts "picked answer 3" }
-            menu.choice Quizquestion.give_quiz.values[0][3], -> { puts "picked answer 4" }
+    def display_question(question, answers)
+        response = prompt.select question do |menu|
+            menu.choice answers[0], -> { @user_answers << answers[0] }
+            menu.choice answers[1], -> { @user_answers << answers[1] }
+            menu.choice answers[2], -> { @user_answers << answers[2] }
+            menu.choice answers[3], -> { @user_answers << answers[3] }
         end
+        sleep 1
+        system("clear")
+        # binding.pry
     end
 
     #helper functions
@@ -57,8 +63,10 @@ class Interface
     end
 
     def quiz_helper
-        # Quizquestion.give_quiz
-        display_question
+        Quizquestion.give_quiz.each do |question, answers|
+            display_question(question, answers)
+        end
+        # binding.pry
     end
     
 end
