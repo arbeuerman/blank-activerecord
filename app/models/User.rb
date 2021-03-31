@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
         password = STDIN.gets.strip
         #find the user in the table 
         user_instance = User.find_by({username:username, password:password})
+        #binding.pry
 
         #if user does not enter correct username password combo, retry
         until user_instance
@@ -50,6 +51,7 @@ class User < ActiveRecord::Base
         # figure out which house received the most number of answers 
         house_id = house_ids.max_by { |house_id, count| count }[0]
         self.house_id = house_id
+        binding.pry
     end 
 
 end 

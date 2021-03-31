@@ -60,13 +60,15 @@ class Interface
 
     def get_house_name_helper
         @user.sort_user
-        binding.pry
+        # binding.pry
+        display_main_menu
         display_house
     end
 
     def display_house
         #call on the house class to display the house data 
         #using the user's new house id 
+        #puts user.house_id
     end 
 
     def display_question(question, answers)

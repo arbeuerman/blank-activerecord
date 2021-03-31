@@ -15,9 +15,7 @@ class Useranswer < ActiveRecord::Base
             Useranswer.create(quizquestion_id: question_response.id, user_id: user.id)
     
         end
-        binding.pry 
     #dont forget about house_id!!!
-
     end
 
     def self.functiontwo 
