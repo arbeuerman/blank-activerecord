@@ -20,15 +20,13 @@ class Interface
         puts "hello"
     end
 
-    def sign_up_or_login
+    def sign_up_or_register
         prompt.select "Would you like to login or register?" do |menu|
             menu.choice "Login", -> { login_helper }
             menu.choice "Register", -> { register_helper }
-            # menu.choice "I do not wish to enter the wizarding world", -> {"Goodbye" }
+            # menu.choice "I do not wish to enter the wizarding world", -> {"Goodbye"}
         end 
-  
     end 
-    
 
     def display_main_menu
         #@user.reload
@@ -48,11 +46,22 @@ class Interface
             menu.choice answers[2], -> { @user_answers << answers[2] }
             menu.choice answers[3], -> { @user_answers << answers[3] }
         end
-        sleep 1
+        # sleep 1
         system("clear")
         # binding.pry
     end
 
+    def add_useranswers
+        Useranswer.enters_answers_for_user(user_answers, user)
+
+    end
+
+    def get_house_name
+
+    end
+    
+    
+    
     #helper functions
     def login_helper
         @user = User.log_in
@@ -66,6 +75,7 @@ class Interface
         Quizquestion.give_quiz.each do |question, answers|
             display_question(question, answers)
         end
+        add_useranswers
         # binding.pry
     end
     
