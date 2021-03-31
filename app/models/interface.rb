@@ -33,7 +33,17 @@ class Interface
         system 'clear'
         #puts "welcome #{user.username}"
         prompt.select "What do you want to do?" do |menu|
+            menu.choice "Begin Quiz", -> { quiz_helper }
             menu.choice "Exit app", -> { puts "Goodbye" }
+        end
+    end
+
+    def display_question
+        prompt.select Quizquestion.give_quiz.keys[0] do |menu|
+            menu.choice Quizquestion.give_quiz.values[0][0], -> { puts "picked answer 1" }
+            menu.choice Quizquestion.give_quiz.values[0][1], -> { puts "picked answer 1" }
+            menu.choice Quizquestion.give_quiz.values[0][2], -> { puts "picked answer 3" }
+            menu.choice Quizquestion.give_quiz.values[0][3], -> { puts "picked answer 4" }
         end
     end
 
@@ -44,7 +54,12 @@ class Interface
 
     def register_helper
         @user = User.create_new_account
-    end 
+    end
+
+    def quiz_helper
+        # Quizquestion.give_quiz
+        display_question
+    end
     
 end
 

@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
     def self.log_in
         #get the username
         puts "Enter your username."
-        username = STDIN.gets.chop
+        username = STDIN.gets.strip
         #get the password
         puts "Enter your password."
-        password = STDIN.gets.chop 
+        password = STDIN.gets.strip
         #find the user in the table 
         user_instance = User.find_by({username:username, password:password})
 
@@ -26,14 +26,15 @@ class User < ActiveRecord::Base
     def self.create_new_account
         #get the username
         puts "Enter the username you would like."
-        username = STDIN.gets.chop
+        username = STDIN.gets.strip
+        
         # while User.find_by(username: username)
         #     puts "This username is already taken"
         #     username
         # end
         #get the password
         puts "Enter the password you would like."
-        password = STDIN.gets.chop 
+        password = STDIN.gets.strip
         #add the user to the table 
         user_instance = User.create({username:username, password:password})
         puts "Welcome #{username}! Your House awaits!"
