@@ -29,34 +29,16 @@ class Interface
     end 
 
     def display_main_menu
-        #@user.reload
+        @user.reload
         sleep 2
         system 'clear'
-        #puts "welcome #{user.username}"
+
+        #use: if @user.house_id to change menu options
         prompt.select "What do you want to do?" do |menu|
             menu.choice "Begin Quiz", -> { quiz_helper }
+            menu.choice "View House", -> { get_house_name_helper}
             menu.choice "Exit app", -> { puts "Goodbye" }
         end
-    end
-
-    def display_question(question, answers)
-        sleep 1
-        system("clear")
-        response = prompt.select question do |menu|
-            menu.choice answers[0]
-            menu.choice answers[1]
-            menu.choice answers[2]
-            menu.choice answers[3]
-        end
-    end
-
-    def add_useranswers
-        Useranswer.enters_answers_for_user(user_answers, user)
-
-    end
-
-    def get_house_name
-
     end
     
     #helper functions
@@ -75,5 +57,32 @@ class Interface
         end
         add_useranswers
     end
+
+    def get_house_name_helper
+        @user.sort_user
+        binding.pry
+        display_house
+    end
+
+    def display_house
+        #call on the house class to display the house data 
+        #using the user's new house id 
+    end 
+
+    def display_question(question, answers)
+        sleep 1
+        system("clear")
+        response = prompt.select question do |menu|
+            menu.choice answers[0]
+            menu.choice answers[1]
+            menu.choice answers[2]
+            menu.choice answers[3]
+        end
+    end
+
+    def add_useranswers
+        Useranswer.enters_answers_for_user(user_answers, user)
+    end
+
     
 end

@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
         #     puts "This username is already taken"
         #     username
         # end
+
         #get the password
         puts "Enter the password you would like."
         password = STDIN.gets.strip
@@ -40,16 +41,15 @@ class User < ActiveRecord::Base
         puts "Welcome #{username}! Your House awaits!"
         user_instance
     end 
+
+    def sort_user
+        # we have all user answers associated to user
+        # loop through user answers
+        # tally the house_ids 
+        house_ids = self.quizquestions.group(:house_id).count
+        # figure out which house received the most number of answers 
+        house_id = house_ids.max_by { |house_id, count| count }[0]
+        self.house_id = house_id
+    end 
+
 end 
-
-# def user_sign_up_helper
-#     name = prompt.ask("What is your username?")
-    # while User.find_by(username: name)
-    #     puts "This username is already taken"
-    #     name = prompt.ask("What is your username?")
-    # end
-
-#     self.user = User.create(name: name, username:??)
-#     puts "Hello #{user.name}!"
-#     main_screen
-# end
