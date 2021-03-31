@@ -11,7 +11,7 @@ class Interface
 
     def run
         welcome
-        sign_up_or_register
+        sign_up_or_login
         display_main_menu
     end
 
@@ -20,7 +20,7 @@ class Interface
         puts "hello"
     end
 
-    def sign_up_or_register
+    def sign_up_or_login
         prompt.select "Would you like to login or register?" do |menu|
             menu.choice "Login", -> { login_helper }
             menu.choice "Register", -> { register_helper }
