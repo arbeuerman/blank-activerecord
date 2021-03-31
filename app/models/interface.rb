@@ -40,15 +40,14 @@ class Interface
     end
 
     def display_question(question, answers)
-        response = prompt.select question do |menu|
-            menu.choice answers[0], -> { @user_answers << answers[0] }
-            menu.choice answers[1], -> { @user_answers << answers[1] }
-            menu.choice answers[2], -> { @user_answers << answers[2] }
-            menu.choice answers[3], -> { @user_answers << answers[3] }
-        end
-        # sleep 1
+        sleep 1
         system("clear")
-        # binding.pry
+        response = prompt.select question do |menu|
+            menu.choice answers[0]
+            menu.choice answers[1]
+            menu.choice answers[2]
+            menu.choice answers[3]
+        end
     end
 
     def add_useranswers
@@ -59,8 +58,6 @@ class Interface
     def get_house_name
 
     end
-    
-    
     
     #helper functions
     def login_helper
@@ -73,33 +70,10 @@ class Interface
 
     def quiz_helper
         Quizquestion.give_quiz.each do |question, answers|
-            display_question(question, answers)
+            response = display_question(question, answers)
+            @user_answers << response
         end
         add_useranswers
-        # binding.pry
     end
     
 end
-
-
-#     def register_helper
-#         puts "typed register"
-#         @user = User.register_helper_class_method
-#     end
-
-#     def generic_warning_message
-#         puts "not login or register, try again"
-#     end
-
-#     def create_post_helper
-#         # Post.create(...)
-#     end
-
-#     def see_all_categories_helper
-#     end
-
-#     def see_my_posts_helper
-#         @user.display_posts
-#         display_main_menu
-#     end
-
