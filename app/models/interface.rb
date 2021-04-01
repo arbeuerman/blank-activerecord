@@ -63,9 +63,7 @@ class Interface
             end    
         else
             take_quiz_and_sort 
-        end 
-        system 'clear'
-        display_house
+        end         
     end
 
     def retake_quiz_helper
@@ -78,7 +76,7 @@ class Interface
     def spell_helper
         prompt.select "#{@user.username}'s Spell Book" do |menu|
             menu.choice "View All Spells", -> { display_spells }
-            menu.choice "Favorited Spells", -> {  }
+            menu.choice "Favorited Spells", -> { view_favorite_spells }
             menu.choice "Back to Main Menu", -> { display_main_menu }
         end
     end
@@ -101,8 +99,10 @@ class Interface
 
         #display user house
         system 'clear'
-            puts "The Sorting Hat is choosing your house..."
-            sleep 2
+        puts "The Sorting Hat is choosing your house..."
+        sleep 2
+        system 'clear'
+        display_house
     end 
 
     def display_house
@@ -177,5 +177,38 @@ class Interface
         spell = Spell.get_spell_info(spell_name)
         puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
         #where do we go after this?
+        prompt.select "" do |menu|
+            menu.choice "Add Spell to Favorites", -> { add_to_favorites(spell) }
+            menu.choice  "Back to Spell Book", -> { spell_helper }
+        end
     end
+
+    def add_to_favorites spell
+        # add spell id and user id to userspells table
+        Userspell.create(user_id: user.id, spell_id: spell.id)
+        # acknowledge that spell has been added
+        puts "Spell added to Favorites!"
+        sleep 1
+
+        prompt.select "" do |menu|
+            menu.choice  "Back to Spell Book", -> { spell_helper }
+        end
+        # have an empty array/or an array of favorite spells  
+        # when user selects a spell to add to favorites, push that spell to array 
+    end 
+
+    def view_favorite_spells
+        system 'clear'
+        user.reload
+        # array of favorite spells from userspells
+        favorite_spell_names = user.spells.map { |spell| spell.name }
+        # make a prompt with names of spells 
+        spell_name = prompt.select("List of Favorite Spells", favorite_spell_names)
+        # display spell info
+        spell = Spell.get_spell_info(spell_name)
+        puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
+        prompt.select "" do |menu|
+            menu.choice  "Back to Spell Book", -> { spell_helper }
+        end
+    end 
 end
