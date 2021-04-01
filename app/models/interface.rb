@@ -170,8 +170,12 @@ class Interface
 
     def display_spells
         #create an array of spells
+        spell_list = Spell.list_of_spell_names
         #use prompt to display a menu of spell names
-        prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
+        spell_name = prompt.select("Choose your destiny?", spell_list)
         #when user clicks on spell, have template to display spell information
+        spell = Spell.get_spell_info(spell_name)
+        puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
+        #where do we go after this?
     end
 end
