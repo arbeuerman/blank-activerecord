@@ -5,7 +5,7 @@ class Interface
     attr_reader :prompt
 
     def initialize
-        @prompt = TTY::Prompt.new
+        @prompt = TTY::Prompt.new(active_color: :cyan)
         @user_answers = []
     end 
 
@@ -130,14 +130,25 @@ class Interface
         Useranswer.enters_answers_for_user(user_answers, user)
     end
 
-    def display_house_data 
-        puts "Your qualities are #{house.qualities}"
-        puts "Your colors are #{house.colors}"
-        puts "Your founder is #{house.founder}"
-        puts "Your animal is #{house.animal}"
-        puts "Your head of house is #{house.head}"
-        puts "Your ghost is #{house.ghost}"
-        puts "Your common room is #{house.commonroom}"
+    def display_house_data
+        if house.id == 1 
+            color = :light_red
+        elsif house.id == 2
+            color = :yellow
+        elsif house.id == 3
+            color = :blue
+        elsif house.id == 4
+            color = :green
+        else
+            color = :light_white
+        end
+            puts "Your qualities are #{house.qualities}".colorize(color)
+            puts "Your colors are #{house.colors}".colorize(color)
+            puts "Your founder is #{house.founder}".colorize(color)
+            puts "Your animal is #{house.animal}".colorize(color)
+            puts "Your head of house is #{house.head}".colorize(color)
+            puts "Your ghost is #{house.ghost}".colorize(color)
+            puts "Your common room is #{house.commonroom}".colorize(color)
         # prompt back to main menu
         prompt.select "" do |menu|
             menu.choice "Back to Main Menu", -> { display_main_menu }
