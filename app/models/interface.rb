@@ -51,20 +51,46 @@ class Interface
     end
 
     def quiz_helper
+        # check if user answers contains answers
+        # and check if user has a house
+        if user.house
+            puts "You've already been sorted into #{user.house.name}"
+            sleep 2
+            prompt.select "Are you sure you want to be resorted?" do |menu|
+                menu.choice "Yes", -> {retake_quiz_helper}
+                menu.choice "No, go back to Main Menu", -> { display_main_menu }
+            end    
+        else
+            take_quiz_and_sort 
+        end 
+        system 'clear'
+        display_house
+    end
+
+    def retake_quiz_helper
+        # delete user answers from useranswers table
+        @user.delete_user_answers
+        # then retake the quiz and re-sort the user
+        take_quiz_and_sort
+    end 
+
+    def take_quiz_and_sort 
+        @user_answers = []
         Quizquestion.give_quiz.each do |question, answers|
             response = display_question(question, answers)
             @user_answers << response
         end
+
         # add user answers to useranswer table
         add_useranswers
         # sort user into house
         @user.sort_user
+
+        #display user house
         system 'clear'
-        puts "The Sorting Hat is choosing your house..."
-        sleep 2
-        system 'clear'
-        display_house
-    end
+            puts "The Sorting Hat is choosing your house..."
+            sleep 2
+    end 
 
     def display_house
         #call on the house class to display the house data 
@@ -113,6 +139,9 @@ class Interface
         puts "Your ghost is #{house.ghost}"
         puts "Your common room is #{house.commonroom}"
         # prompt back to main menu
+        prompt.select "" do |menu|
+            menu.choice "Back to Main Menu", -> { display_main_menu }
+        end
     end 
 
     

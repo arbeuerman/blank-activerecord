@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
         user_instance
     end 
 
+    # instance methods
     def sort_user
         # we have all user answers associated to user
         # loop through user answers
@@ -51,12 +52,14 @@ class User < ActiveRecord::Base
         # figure out which house received the most number of answers 
         house_id = house_ids.max_by { |house_id, count| count }[0]
         self.update(house_id: house_id)
-        # binding.pry
     end
 
     def find_user_house
         self.house
-        # binding.pry
     end
+
+    def delete_user_answers
+        self.useranswers.destroy_all
+    end 
 
 end 

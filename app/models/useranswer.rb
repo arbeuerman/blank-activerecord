@@ -13,14 +13,6 @@ class Useranswer < ActiveRecord::Base
             #get user_id from User
             #populate user_answers table
             Useranswer.create(quizquestion_id: question_response.id, user_id: user.id)
-    
         end
-    #dont forget about house_id!!!
     end
-
-    def self.functiontwo 
-    end 
-
-
-
 end

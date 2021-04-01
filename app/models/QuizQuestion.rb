@@ -16,9 +16,6 @@ class Quizquestion < ActiveRecord::Base
             end
         end
         # Add the answer that the user chose and their id to the useranswers table
-        # Once quiz is finished, calculate the responses for each house for the user
-        # Return the house with the most responses
-        # Sort the user into a house
         quiz
     end
 end
