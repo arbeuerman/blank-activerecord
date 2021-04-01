@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_155056) do
+ActiveRecord::Schema.define(version: 2021_04_01_194410) do
 
   create_table "houses", force: :cascade do |t|
     t.string "name"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2021_04_01_155056) do
     t.integer "house_id"
   end
 
+  create_table "spells", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.string "incantation"
+    t.string "description"
+  end
+
   create_table "useranswers", force: :cascade do |t|
     t.integer "quizquestion_id"
     t.integer "user_id"
@@ -39,6 +46,11 @@ ActiveRecord::Schema.define(version: 2021_04_01_155056) do
     t.string "username"
     t.string "password"
     t.integer "house_id"
+  end
+
+  create_table "userspells", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "spell_id"
   end
 
 end

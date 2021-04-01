@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
     belongs_to :house
     has_many :useranswers
     has_many :quizquestions, through: :useranswers
+    has_many :userspells
+    has_many :spells, through: :userspells
 
     def self.log_in
         #get the username
