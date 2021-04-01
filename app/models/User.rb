@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
         house_ids = self.quizquestions.group(:house_id).count
         # figure out which house received the most number of answers 
         house_id = house_ids.max_by { |house_id, count| count }[0]
-        self.house_id = house_id
-        binding.pry
+        self.update(house_id: house_id)
+        # binding.pry
     end 
 
 end 
