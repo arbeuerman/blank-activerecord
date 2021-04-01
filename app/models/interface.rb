@@ -112,6 +112,7 @@ class Interface
         puts "Your head of house is #{house.head}"
         puts "Your ghost is #{house.ghost}"
         puts "Your common room is #{house.commonroom}"
+        # prompt back to main menu
     end 
 
     
