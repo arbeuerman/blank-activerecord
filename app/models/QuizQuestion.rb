@@ -5,8 +5,7 @@ class Quizquestion < ActiveRecord::Base
 
     def self.give_quiz
         # Display some sort of description of the quiz
-        # puts "Welcome to the Sorting Hat Quiz! INSERT SONG HERE"
-        # Display the question and all of the responses for each question to the user using prompt
+        puts "Welcome to the Sorting Hat Quiz!" # INSERT SONG HERE"
         quiz = {}
         self.all.each do |question|
             if quiz[question.question]
@@ -15,7 +14,6 @@ class Quizquestion < ActiveRecord::Base
                 quiz[question.question] = [question.response_option]
             end
         end
-        # Add the answer that the user chose and their id to the useranswers table
         quiz
     end
 end

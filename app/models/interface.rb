@@ -24,7 +24,6 @@ class Interface
         prompt.select "Would you like to login or register?" do |menu|
             menu.choice "Login", -> { login_helper }
             menu.choice "Register", -> { register_helper }
-            # menu.choice "I do not wish to enter the wizarding world", -> {"Goodbye"}
         end 
     end 
 
@@ -33,7 +32,6 @@ class Interface
         sleep 2
         system 'clear'
 
-        #use: if @user.house_id to change menu options
         prompt.select "What do you want to do?" do |menu|
             menu.choice "Begin Quiz", -> { quiz_helper }
             menu.choice "View House", -> { display_house }
@@ -42,18 +40,27 @@ class Interface
         end
     end
     
-    #helper functions
+    ##################
+    # Helper Methods #
+    ##################
+
     def login_helper
+        prompt.select "Do you have a username and password?" do |menu|
+            menu.choice "Yes"
+            menu.choice "No", -> {register_helper}
+        end 
         @user = User.log_in
     end 
 
     def register_helper
+        puts "Please create a username and password."
+        sleep 1
+        system 'clear'
         @user = User.create_new_account
     end
 
     def quiz_helper
-        # check if user answers contains answers
-        # and check if user has a house
+        # check if user has a house
         if user.house
             puts "You've already been sorted into #{user.house.name}"
             sleep 2
@@ -81,12 +88,14 @@ class Interface
         end
     end
 
-    ################
-    # Additional Methods
-    ################
+    ######################
+    # Additional Methods #
+    ######################
 
     def take_quiz_and_sort 
         @user_answers = []
+        
+        # Display the question and all of the responses for each question to the user using prompt
         Quizquestion.give_quiz.each do |question, answers|
             response = display_question(question, answers)
             @user_answers << response
@@ -94,6 +103,7 @@ class Interface
 
         # add user answers to useranswer table
         add_useranswers
+
         # sort user into house
         @user.sort_user
 
@@ -125,7 +135,6 @@ class Interface
                 menu.choice "No thanks", -> { display_main_menu }
             end
         end
-        # Display the number of people in your house
     end 
 
     def display_question(question, answers)
@@ -140,6 +149,7 @@ class Interface
     end
 
     def add_useranswers
+        # Add the answer that the user chose and their id to the useranswers table
         Useranswer.enters_answers_for_user(user_answers, user)
     end
 
@@ -155,13 +165,15 @@ class Interface
         else
             color = :light_white
         end
-            puts "Your qualities are #{house.qualities}".colorize(color)
-            puts "Your colors are #{house.colors}".colorize(color)
-            puts "Your founder is #{house.founder}".colorize(color)
-            puts "Your animal is #{house.animal}".colorize(color)
-            puts "Your head of house is #{house.head}".colorize(color)
-            puts "Your ghost is #{house.ghost}".colorize(color)
-            puts "Your common room is #{house.commonroom}".colorize(color)
+        puts "Your qualities are #{house.qualities}".colorize(color)
+        puts "Your colors are #{house.colors}".colorize(color)
+        puts "Your founder is #{house.founder}".colorize(color)
+        puts "Your animal is #{house.animal}".colorize(color)
+        puts "Your head of house is #{house.head}".colorize(color)
+        puts "Your ghost is #{house.ghost}".colorize(color)
+        puts "Your common room is #{house.commonroom}".colorize(color)
+        # Display the number of people in your house
+        
         # prompt back to main menu
         prompt.select "" do |menu|
             menu.choice "Back to Main Menu", -> { display_main_menu }
@@ -193,8 +205,6 @@ class Interface
         prompt.select "" do |menu|
             menu.choice  "Back to Spell Book", -> { spell_helper }
         end
-        # have an empty array/or an array of favorite spells  
-        # when user selects a spell to add to favorites, push that spell to array 
     end 
 
     def view_favorite_spells

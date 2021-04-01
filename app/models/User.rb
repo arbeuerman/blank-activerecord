@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
         password = STDIN.gets.strip
         #find the user in the table 
         user_instance = User.find_by({username:username, password:password})
-        #binding.pry
 
         #if user does not enter correct username password combo, retry
         until user_instance
@@ -46,6 +45,7 @@ class User < ActiveRecord::Base
     end 
 
     # instance methods
+    
     def sort_user
         # we have all user answers associated to user
         # loop through user answers
