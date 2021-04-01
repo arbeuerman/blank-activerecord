@@ -1,7 +1,7 @@
 class Interface 
 
     #setter and getter methods 
-    attr_accessor :user, :user_answers
+    attr_accessor :user, :user_answers, :house
     attr_reader :prompt
 
     def initialize
@@ -67,10 +67,16 @@ class Interface
     end
 
     def display_house
-        house = @user.find_user_house
+        #call on the house class to display the house data 
+        @house = @user.find_user_house
+        
+        # Qualities and colors incoporated somehow
         if house
             puts "You're in #{house.name}!"
+            
+            #can we store this as a variable instead of rewriting the prompt over and over?
             prompt.select "" do |menu|
+                menu.choice "Learn more about your house", -> {display_house_data}
                 menu.choice "Back to Main Menu", -> { display_main_menu }
             end
         else
@@ -80,13 +86,7 @@ class Interface
                 menu.choice "No thanks", -> { display_main_menu }
             end
         end
-
-        #call on the house class to display the house data 
-        #using the user's new house id 
-        #puts user.house_id
-        # Want it to say the name of the house, if not in a house it asks you to take the quiz
         # Display the number of people in your house
-        # Qualities and colors incoporated somehow
     end 
 
     def display_question(question, answers)
@@ -103,6 +103,16 @@ class Interface
     def add_useranswers
         Useranswer.enters_answers_for_user(user_answers, user)
     end
+
+    def display_house_data 
+        puts "Your qualities are #{house.qualities}"
+        puts "Your colors are #{house.colors}"
+        puts "Your founder is #{house.founder}"
+        puts "Your animal is #{house.animal}"
+        puts "Your head of house is #{house.head}"
+        puts "Your ghost is #{house.ghost}"
+        puts "Your common room is #{house.commonroom}"
+    end 
 
     
 end

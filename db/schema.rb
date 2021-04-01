@@ -10,12 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_182407) do
+ActiveRecord::Schema.define(version: 2021_04_01_155056) do
 
   create_table "houses", force: :cascade do |t|
     t.string "name"
     t.string "colors"
     t.string "qualities"
+    t.string "founder"
+    t.string "animal"
+    t.string "head"
+    t.string "ghost"
+    t.string "commonroom"
   end
 
   create_table "quizquestions", force: :cascade do |t|
