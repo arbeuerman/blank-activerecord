@@ -52,6 +52,11 @@ class User < ActiveRecord::Base
         house_id = house_ids.max_by { |house_id, count| count }[0]
         self.update(house_id: house_id)
         # binding.pry
-    end 
+    end
+
+    def find_user_house
+        self.house
+        # binding.pry
+    end
 
 end 

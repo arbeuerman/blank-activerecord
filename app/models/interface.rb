@@ -36,7 +36,7 @@ class Interface
         #use: if @user.house_id to change menu options
         prompt.select "What do you want to do?" do |menu|
             menu.choice "Begin Quiz", -> { quiz_helper }
-            menu.choice "View House", -> { get_house_name_helper}
+            menu.choice "View House", -> { display_house }
             menu.choice "Exit app", -> { puts "Goodbye" }
         end
     end
@@ -55,20 +55,38 @@ class Interface
             response = display_question(question, answers)
             @user_answers << response
         end
+        # add user answers to useranswer table
         add_useranswers
-    end
-
-    def get_house_name_helper
+        # sort user into house
         @user.sort_user
-        # binding.pry
-        display_main_menu
+        system 'clear'
+        puts "The Sorting Hat is choosing your house..."
+        sleep 2
+        system 'clear'
         display_house
     end
 
     def display_house
+        house = @user.find_user_house
+        if house
+            puts "You're in #{house.name}!"
+            prompt.select "" do |menu|
+                menu.choice "Back to Main Menu", -> { display_main_menu }
+            end
+        else
+            puts "You haven't been sorted into a house yet!"
+            prompt.select "Do you want to take your sorting quiz?" do |menu|
+                menu.choice "Let's do it!", -> { quiz_helper }
+                menu.choice "No thanks", -> { display_main_menu }
+            end
+        end
+
         #call on the house class to display the house data 
         #using the user's new house id 
         #puts user.house_id
+        # Want it to say the name of the house, if not in a house it asks you to take the quiz
+        # Display the number of people in your house
+        # Qualities and colors incoporated somehow
     end 
 
     def display_question(question, answers)
