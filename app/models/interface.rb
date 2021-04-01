@@ -37,6 +37,7 @@ class Interface
         prompt.select "What do you want to do?" do |menu|
             menu.choice "Begin Quiz", -> { quiz_helper }
             menu.choice "View House", -> { display_house }
+            menu.choice "Spell Book", -> { spell_helper }
             menu.choice "Exit app", -> { puts "Goodbye" }
         end
     end
@@ -72,7 +73,19 @@ class Interface
         @user.delete_user_answers
         # then retake the quiz and re-sort the user
         take_quiz_and_sort
-    end 
+    end
+
+    def spell_helper
+        prompt.select "#{@user.username}'s Spell Book" do |menu|
+            menu.choice "View All Spells", -> { display_spells }
+            menu.choice "Favorited Spells", -> {  }
+            menu.choice "Back to Main Menu", -> { display_main_menu }
+        end
+    end
+
+    ################
+    # Additional Methods
+    ################
 
     def take_quiz_and_sort 
         @user_answers = []
@@ -155,5 +168,10 @@ class Interface
         end
     end 
 
-    
+    def display_spells
+        #create an array of spells
+        #use prompt to display a menu of spell names
+        prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
+        #when user clicks on spell, have template to display spell information
+    end
 end

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_194410) do
 
   create_table "spells", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "spell_type"
     t.string "incantation"
     t.string "description"
   end
