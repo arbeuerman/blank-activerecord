@@ -73,10 +73,10 @@ class Interface
 
         prompt.select "What do you want to do?" do |menu|
             menu.choice "View Acceptance Letter", -> { letter_helper }
-            menu.choice "Begin Quiz", -> { quiz_helper }
+            menu.choice "Put on the Sorting Hat", -> { quiz_helper }
             menu.choice "View House", -> { display_house }
             menu.choice "Spell Book", -> { spell_helper }
-            menu.choice "Exit app", -> { puts "Goodbye" }
+            menu.choice "Leave the Wizarding World", -> { puts "Mischief Managed" }
         end
     end
     
@@ -227,7 +227,13 @@ class Interface
         puts "Your head of house is #{house.head}".colorize(color)
         puts "Your ghost is #{house.ghost}".colorize(color)
         puts "Your common room is #{house.commonroom}".colorize(color)
+        
         # Display the number of people in your house
+        user_house = user.house 
+        # binding.pry
+        count = user_house.number_of_members
+        puts "There are #{count} members in your house".colorize(color)
+
         
         # prompt back to main menu
         prompt.select "" do |menu|
@@ -276,11 +282,24 @@ class Interface
             # display spell info
             spell = Spell.get_spell_info(spell_name)
             puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
+            # provide option to delete spell from favorites
+            prompt.select "" do |menu|
+                menu.choice "Remove this spell from Favorites", -> {remove_from_favorites(spell)}
+                menu.choice  "Back to Spell Book", -> { spell_helper }
+            end
         else
             puts "You do not have any favorited spells yet!"
             sleep 1
+            prompt.select "" do |menu|
+                menu.choice  "Back to Spell Book", -> { spell_helper }
+            end
         end 
-        
+    end 
+
+    def remove_from_favorites spell
+        #delete an entry from the userspells table 
+        Userspell.find_by(user_id: user.id, spell_id: spell.id).destroy
+        puts "You removed #{spell.name} from your favorites!"
         prompt.select "" do |menu|
             menu.choice  "Back to Spell Book", -> { spell_helper }
         end
