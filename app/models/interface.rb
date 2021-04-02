@@ -81,6 +81,7 @@ class Interface
     end
 
     def spell_helper
+        system 'clear'
         prompt.select "#{@user.username}'s Spell Book" do |menu|
             menu.choice "View All Spells", -> { display_spells }
             menu.choice "Favorited Spells", -> { view_favorite_spells }
@@ -184,9 +185,10 @@ class Interface
         #create an array of spells
         spell_list = Spell.list_of_spell_names
         #use prompt to display a menu of spell names
-        spell_name = prompt.select("Choose your destiny?", spell_list)
+        spell_name = prompt.select("All Spells:", spell_list)
         #when user clicks on spell, have template to display spell information
         spell = Spell.get_spell_info(spell_name)
+        system 'clear'
         puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
         #where do we go after this?
         prompt.select "" do |menu|
