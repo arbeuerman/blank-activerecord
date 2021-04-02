@@ -56,7 +56,7 @@ class Interface
      `/hNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNmhs+:.`                                                
         ./shmmNNMMMMMMMMMMMMMMMMNNNNmmhys+:-.                                                       
              `.-://++oooooo++//::-..`                                                               ".colorize(:magenta)
-             puts "Welcome to the Wizarding World!"
+             puts "Welcome to the Wizarding World!".bold
     end
 
     def sign_up_or_login
@@ -72,6 +72,7 @@ class Interface
         system 'clear'
 
         prompt.select "What do you want to do?" do |menu|
+            menu.choice "View Acceptance Letter", -> { letter_helper }
             menu.choice "Begin Quiz", -> { quiz_helper }
             menu.choice "View House", -> { display_house }
             menu.choice "Spell Book", -> { spell_helper }
@@ -97,6 +98,20 @@ class Interface
         system 'clear'
         @user = User.create_new_account
     end
+
+    def letter_helper
+        puts "\nHOGWARTS SCHOOL of WITCHCRAFT and WIZARDRY".bold
+
+        puts "\nHeadmaster: Albus Dumbledore\n(Order of Merlin, First Class, Grand Sorc., Chf. Warlock,\nSupreme Mugwump, International Confed. of Wizards)\n"
+        
+        puts"\nDear Mr/Ms. #{user.username},\n\nWe are pleased to inform you that you have been accepted at Hogwarts School of Witchcraft and Wizardry. Please find enclosed a list of all necessary books and equipment.\n\nTerm begins on 1 September. We await your owl by no later than 31 July.\n"
+        
+        puts "\nYours sincerely,\n\nMinerva McGonagall\nDeputy Headmistress"
+
+        prompt.select "" do |menu|
+            menu.choice "Back to Main Menu", -> { display_main_menu }
+        end
+    end 
 
     def quiz_helper
         # check if user has a house
@@ -253,11 +268,19 @@ class Interface
         user.reload
         # array of favorite spells from userspells
         favorite_spell_names = user.spells.map { |spell| spell.name }
-        # make a prompt with names of spells 
-        spell_name = prompt.select("List of Favorite Spells", favorite_spell_names)
-        # display spell info
-        spell = Spell.get_spell_info(spell_name)
-        puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
+        
+        if favorite_spell_names.size > 0
+            # make a prompt with names of spells 
+
+            spell_name = prompt.select("List of Favorite Spells", favorite_spell_names)
+            # display spell info
+            spell = Spell.get_spell_info(spell_name)
+            puts "Spell name: ".bold +  "#{spell.name}" + " \nIncantation: ".bold + "#{spell.incantation}" + "\nDescription of Spell: ".bold + "#{spell.description}" 
+        else
+            puts "You do not have any favorited spells yet!"
+            sleep 1
+        end 
+        
         prompt.select "" do |menu|
             menu.choice  "Back to Spell Book", -> { spell_helper }
         end
