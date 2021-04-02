@@ -17,7 +17,46 @@ class Interface
 
     #enter the wizarding world
     def welcome
-        puts "hello"
+        puts "                                                    `.-:/+o/`                                       
+                                               ./oydmNNMMMMMms:.`                                   
+                                              /mMNmMMMMMMMMMMMMNmmhs+:-`                            
+                                             .NMMN:dMMNyMMMMMMMMMMMMMMNmy/.                         
+                                             yMMMMm:mMd/MMMMMMMMMMMMMMMMMMm/                        
+                                            -MMMMMMy-dh oNMMMMNddddhhhhhyo/.                        
+                                            hMMMMMMNo...`-dMMMd`                                    
+                                         `.oMMMMMMMMMd+Nd/hMMMm                                     
+                                       `smNMMMMMMMMMMMMMMNdNy+.                                     
+                                       hMMMMMMMMMMMMMMMMMMMd`                                       
+                                      +MMMMMMMMMMMMMMMMMMMMMs                                       
+                                     `NMMMMMMMMMMMMMMMMMMMMMMo                                      
+                                    `yMMMMMMMMMMMMMMMMMMMMMMMM/                                     
+                                   -hMMMMMNNNMMMMMMMMMMMMMMMMMN:                                    
+                                 `yMMMMMMy:--:+dNMMMMMMMMMMMMMMN:                                   
+                                 sMMMMMMMMm/    -hMMMMMMMMMMMMMMMy                                  
+                                 sMMMMMMMM+`      /mMMMMMMMMMMMMMN`                                 
+                                 .MMMMMMMMMmo`     `sMMMMMMMMNy/+s                                  
+                                  yMMMMMMMMMMd`      -hMMMMh/`  od                                  
+                                  :MMMMMMMMMMMNs/-`    ./:`   -yMM/                                 
+                                  /MMMMMMMMMMMMMMMN/./shdy/``mMMMMN.                                
+                                 `mMMMMMMMMMMMMNy+odMMMMMMMNhyMMMMMm`                               
+                                 oMMMMMMMMMMMMMddNMMMMMMMMMMMMMMMMMMd`                              
+                                 dMMMMMMMMMMMMMMMMMMMmdhhyyssssydMMMMd.                             
+                                oMMMMMMMMMMMMMMMmy+-```         `:mMMMm-                            
+                              .yMMMMMMMMMMMMNh+.`     ``.-::////:-:so+NN+                           
+                             -NMMMMMMMMMMds:..-:/osydmmNNNNMMMMMMNNmh++MMy`                         
+                             oMMmNMMNdhyosydmNNMMMMMMMMMMMMMMMMMMMMMMMNMMMd     `-/+syddmmmds.      
+                             +MMy-/oymmNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo:/ohmNMMmdyssshdMN-     
+                             .MMMmmNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNdy+-.`     `oMo     
+                              mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNds/.`       `.:ohs`     
+                             `NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmhs:.`    `-:+syyyso/.       
+         .:+syhddhhys+/:----/dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMdo:-...-:/+syyys+:-.`           
+      `/hmMMMMMMMMMMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNmmdyssyyhhys+:-.`                  
+     .dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNmdys+:--.```                               
+     +MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNmhs+:-`                                          
+     `/hNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNmhs+:.`                                                
+        ./shmmNNMMMMMMMMMMMMMMMMNNNNmmhys+:-.                                                       
+             `.-://++oooooo++//::-..`                                                               ".colorize(:magenta)
+             puts "Welcome to the Wizarding World!"
     end
 
     def sign_up_or_login
